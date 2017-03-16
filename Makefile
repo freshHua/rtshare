@@ -1,7 +1,7 @@
 CXX := clang++
 
 #链接头文件
-PRIVATE_C_INCLUDES :=
+PRIVATE_C_INCLUDES := 
 
 PRIVATE_DEBUG_CFLAGS := 
 
@@ -9,7 +9,8 @@ PRIVATE_CFLAGS :=
 
 PRIVATE_CPPFLAGS :=
 
-PRIVATE_LDFLAGS :=
+PRIVATE_LDFLAGS := -lgflags \
+		   -lpthread 
 
 PRIVATE_LDLIBS	:=
 
