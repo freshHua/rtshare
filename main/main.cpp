@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<iostream>
 #include<pthread.h>
+#include <unistd.h>
 
 #define STRIP_FLAG_HELP 1
 #include <gflags/gflags.h>
@@ -23,5 +24,11 @@ int main(int argc, char*argv[])
     std::cout << "rtshare config file " << FLAGS_config_file << std::endl ;
     std::cout << "run daemon in the background " << FLAGS_daemon << std::endl ;
     printf("This is rtshare programming\n");
+    int count = 0;
+    while(1){
+	printf("@@@@%d@@@\r",count++);
+	fflush(stdout);
+	sleep(1);
+    }
     return 0;
 }

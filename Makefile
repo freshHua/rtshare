@@ -14,13 +14,13 @@ PRIVATE_LDFLAGS := -lgflags \
 
 PRIVATE_LDLIBS	:=
 
-MAIN_MODULE := rtshare
+MAIN_MODULE := rtshd
 
 #回显命令
 hide:=@
 
 # 代码文件
-src_sources :=  main.cpp
+src_sources :=  main/main.cpp
 
 # objects文件 .cpp -> .o 
 src_objects := $(src_sources:.cpp=.o)
@@ -68,7 +68,9 @@ endef
 $(MAIN_MODULE):$(src_objects)
 	@mkdir -p $(dir $@)
 	@echo "target Executable:($@)"
-	$(CXX) $(src_objects) -o $@ $(PRIVATE_LDFLAGS) $(PRIVATE_LDLIBS)
+	$(hide) $(CXX) $(src_objects) -o $@ $(PRIVATE_LDFLAGS) $(PRIVATE_LDLIBS)
 
 clean:
-	@rm -rf *.o rtshare *.P
+	$(hide)find ./ -name "*.o" -print | xargs rm -rf
+	$(hide)find ./ -name "*.P" -print | xargs rm -rf
+	$(hide) rm -rf $(MAIN_MODULE)
