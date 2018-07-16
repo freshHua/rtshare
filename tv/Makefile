@@ -17,38 +17,20 @@ PRIVATE_LDFLAGS := -std=c++17 \
 
 PRIVATE_LDLIBS :=
 
-MAIN_MODULE := rtshd
-
-BUILDER_MODULE := builder
-
-TESTER_MODULE := tester
+MAIN_MODULE := tv
 
 #回显命令
 hide:=@
 
 # 代码文件
-my_src_files := matrix_keymap.cpp \
-		main.cpp \
-		fib.cpp
+my_src_files := use_tv.cpp \
+					       tv.cpp
 
-builder_src_files := builder.cpp
+src_cpp_sources :=  $(filter %.cpp,$(my_src_files)) 
 
-
-tester_src_files := tester.cpp
-
-src_cpp_sources := $(addprefix main/, $(filter %.cpp,$(my_src_files)) )
 # objects文件 .cpp -> .o 
 src_objects := $(src_cpp_sources:.cpp=.o)
 
-
-builder_src_cpp_sources := $(addprefix main/, $(filter %.cpp,$(builder_src_files)) )
-# objects文件 .cpp -> .o 
-builder_src_objects := $(builder_src_cpp_sources:.cpp=.o)
-
-
-tester_src_cpp_sources := $(addprefix main/, $(filter %.cpp,$(tester_src_files)) )
-# objects文件 .cpp -> .o 
-tester_src_objects := $(tester_src_cpp_sources:.cpp=.o)
 
 ###########################################################
 ## Commands for munging the dependency files GCC generates
@@ -85,31 +67,17 @@ endef
 
 -include $(c_objects:%.o=%.P)
 
-cpp_normal_sources := $(filter-out ../%,$(filter %.cpp,$(my_src_files)))
-
 %.o:%.cpp 
 	$(transform-cpp-to-o)
 
 .PHONY:clean
-.PHONY:tester
+
 $(MAIN_MODULE):$(src_objects)
 	@mkdir -p $(dir $@)
 	@echo "target Executable:($@)"
 	$(hide) $(CXX) $(src_objects) -o $@ $(PRIVATE_LDFLAGS) $(PRIVATE_LDLIBS)
 
-$(BUILDER_MODULE):$(builder_src_objects)
-	@mkdir -p $(dir $@)
-	@echo "target Executable:($@)"
-	$(hide) $(CXX) $(builder_src_objects) -o $@ $(PRIVATE_LDFLAGS) $(PRIVATE_LDLIBS)
-
-
-$(TESTER_MODULE):$(tester_src_objects)
-	@mkdir -p $(dir $@)
-	@echo "target Executable:($@)"
-	$(hide) $(CXX) $(tester_src_objects) -o $@ $(PRIVATE_LDFLAGS) $(PRIVATE_LDLIBS)
-
-
 clean:
 	$(hide)find ./ -name "*.o" -print | xargs rm -rf
 	$(hide)find ./ -name "*.P" -print | xargs rm -rf
-	$(hide)rm -rf $(MAIN_MODULE) $(BUILDER_MODULE) $(TESTER_MODULE)
+	$(hide)rm -rf $(MAIN_MODULE) 

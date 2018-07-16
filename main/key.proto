@@ -1,0 +1,12 @@
+message MsgHeader {
+    required fixed32 token = 1; // generated dynamically
+    required MsgType type = 2;
+    required bytes payload = 5;
+}
+
+enum MsgType {
+    UNKNOWN = 0;
+    REQUEST = 1;
+    RESPONSE = 2;
+    UNSOL_RESPONSE = 3;
+}
