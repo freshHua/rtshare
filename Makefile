@@ -9,10 +9,11 @@ PRIVATE_DEBUG_CFLAGS :=
 
 PRIVATE_CFLAGS :=
 
-PRIVATE_CPPFLAGS :=
+PRIVATE_CPPFLAGS := -std=c++11 \
+		    -Wall -Wextra \
+		    -Werror
 
-PRIVATE_LDFLAGS := -std=c++17 \
-		   -lgflags \
+PRIVATE_LDFLAGS := -lgflags \
 		   -lpthread 
 
 PRIVATE_LDLIBS :=

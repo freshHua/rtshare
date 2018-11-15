@@ -103,6 +103,12 @@ public:
 
 int main(int argc, char*argv[])
 {
+    const char*line= "0000000000000000 t _head";
+    char *func;
+    char addr_str[32];
+    char *mod;
+    char ch;
+
     int mypid ;
     int rows = 5;
     int cols = 5;
@@ -118,7 +124,6 @@ int main(int argc, char*argv[])
     std::cout << "rtshare config file " << FLAGS_config_file << std::endl ;
     std::cout << "run daemon in the background " << FLAGS_daemon << std::endl ;
     printf("This is rtshare programming \n");
-    printf("ioctl value GYROSCOPE_IOCTL_SMT_DATA %x\n", GYROSCOPE_IOCTL_SMT_DATA);
     printf("ioctl value GYROSCOPE_IOCTL_INIT 0x%x \n", GYROSCOPE_IOCTL_INIT);
 
     printf("row_shift %d max_keys %d\n", row_shift,rows << row_shift);
@@ -144,5 +149,8 @@ int main(int argc, char*argv[])
 
     Example EX;
     std::cout << EX.getTotal() <<  std::endl;
+    sscanf(line, "%s %c %ms\t[%ms",addr_str, &ch, &func, &mod);
+    printf("%s\n",addr_str);
+    std::cout << ch << std::endl;
     return 0;
 }

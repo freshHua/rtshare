@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 class cs
@@ -29,13 +31,14 @@ cs get_cs()
 
 int main()
 {
-     // 合法
-    (get_cs() = cs(2)).change(323);
-    get_cs() = cs(2);// operator=()
-    get_cs().change(32);
 
-    int m = -15;
-    int n = 6 ;
-    std::cout << m%n << std::endl;
+    vector<int> myvec{ 3, 2, 5, 7, 3, 2 };
+    vector<int> lbvec(myvec);
+
+    sort(lbvec.begin(), lbvec.end(), [](int a, int b) ->  bool { return a < b; });   // Lambda表达式
+    cout << "lambda expression:" << endl;
+    for (auto it : lbvec)
+        cout << it << ' ';
+
     return 0;
 }

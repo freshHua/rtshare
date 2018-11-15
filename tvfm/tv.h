@@ -39,9 +39,8 @@ public:
 };
 
 class Tv{
-public:
-
 	friend void Remote::set_chan(Tv&t, int c);//友元成员函数
+public:
 	enum{
 		Off,
 		On
