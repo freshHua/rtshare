@@ -3,7 +3,7 @@ CXX := clang++
 PROTOC := protoc
 
 #链接头文件
-PRIVATE_C_INCLUDES := 
+PRIVATE_C_INCLUDES := -I /opt/local/include
 
 PRIVATE_DEBUG_CFLAGS := 
 
@@ -16,7 +16,7 @@ PRIVATE_CPPFLAGS := -std=c++11 \
 PRIVATE_LDFLAGS := -lgflags \
 		   -lpthread 
 
-PRIVATE_LDLIBS :=
+PRIVATE_LDLIBS := -L /opt/local/lib
 
 MAIN_MODULE := rtshd
 
